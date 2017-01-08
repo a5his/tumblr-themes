@@ -1,0 +1,236 @@
+<!--
+..####....####...##..##..######...####...........#####....####...######.
+.##..##..##......##..##....##....##..............##..##..##..##....##...
+.######...####...######....##.....####...........#####...######....##...
+.##..##......##..##..##....##........##..........##..##..##..##....##...
+.##..##...####...##..##..######...####...........##..##..##..##..######.
+........................................................................
+-->
+<html>
+    <head>
+        <title>{Title}</title>
+        <link rel="shortcut icon" href="{Favicon}">
+        <link rel="alternate" type="application/rss+xml" href="{RSS}">
+        {block:Description}
+            <meta name="description" content="{MetaDescription}" />
+        {/block:Description}
+        <link href="https://fonts.googleapis.com/css?family=Bad+Script|Unica+One|Economica|Great+Vibes|Raleway+Dots|Wire+One" rel="stylesheet">
+        <style type="text/css">
+            body{
+                font-family:'Unica One', cursive;
+                padding:0px;
+                margin:0px;
+            }
+            header .title{
+                text-transform: uppercase;
+                text-align: center;
+                color: #555;
+            }
+            .container #description{
+                font-family: 'Economica', sans-serif;
+                text-align: center;
+                color: rgba(0,0,0,.38);
+                margin-bottom:30px;
+            }
+            .posts{
+                column-count: 4;
+                column-gap: 4px;
+            }
+            .post{
+                -webkit-column-break-inside: avoid; /* Chrome, Safari, Opera */
+                page-break-inside: avoid; /* Firefox */
+                break-inside: avoid; /* IE 10+ */
+            }
+            .post.photo{
+                position:relative;
+            }
+            .post .caption{
+                left: 0px;
+                bottom: 0px;
+                background-color: rgba(0,0,0,0.4);
+                color: #ffffff;
+                width: 100%;
+                position: absolute;
+                font-family: 'Raleway Dots', cursive;
+            }
+            .post .caption p:first-child{
+                margin: 5px;
+                padding: 0px;
+                font-family: 'Raleway Dots', cursive;
+                font-size: 12px;
+                line-height: 100%;
+                cursor:default;
+            }
+            .posts .photo img{
+                max-width: 100%;
+                max-height: 100%;
+            }
+            .posts .photo .like_button{
+                position: absolute;
+                top: 10px;
+                left: 7px;
+            }
+            .posts .photo .reblog_button{
+                position: absolute;
+                top: 10px;
+                left: 30px;
+            }
+            .posts .photo .note{
+                position: absolute;
+                background-color: rgba(0,0,0,0.8);
+                color: #ffffff;
+                font-size: 10px;
+                font-family: 'Wire One', sans-serif;
+                top: 10px;
+                left: 49px;
+                padding: 2px 5px;
+                cursor:default;
+            }
+            .posts .photo .note:hover{
+                background-color: rgba(255,0,0,0.8);
+            }
+            footer{
+                position: fixed;
+                bottom: 0;
+                width: 100%;
+                background: rgba(0,0,0,0.6);
+            }
+            footer .footer-nav{
+                padding:5px;
+                font-family: 'Economica', sans-serif;
+                font-size: 14px;
+                text-align:center;
+            }
+            footer a{
+                color:#fff;
+                cursor:pointer;
+            }
+            footer a.next{
+                margin-left:10px;
+                margin-right:10px;
+            }
+            footer a.previous{
+                margin-right:10px;
+            }
+            footer a.archive{
+                color:#aaa;
+            }
+            footer .copyright{
+                float: right;
+                color: #ffffff;
+                margin-right: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1 class="title">{Title}</h1>
+        </header>
+        <div class="container">
+            {block:Description}
+                <p id="description">{Description}</p>
+            {/block:Description}
+            <div class="posts">
+                    {block:Posts}
+                        {block:Text}
+                            <li class="post text">
+                                {block:Title}
+                                    <h3><a href="{Permalink}">{Title}</a></h3>
+                                {/block:Title}{Body}
+                            </li>
+                        {/block:Text}
+                        {block:Photo}
+                            <div class="post photo">
+                                {LinkOpenTag}
+                                    <img src="{PhotoURL-400}" alt="{PhotoAlt}" />
+                                {linkCloseTag}
+                                {block:Caption}
+                                    <div class="caption" style="">{Caption}</div>
+                                {/block:Caption}
+                                {LikeButton color="grey" size="15"}
+                                {ReblogButton color="grey" size="15"}
+                                {block:NoteCount}
+                                    <span class="note">{NoteCountWithLabel}</span>
+                                {/block:NoteCount}
+                            </div>
+                        {/block:Photo}
+                        {block:Panorama}
+                            <li class="post panorama">
+                                {LinkOpenTag}
+                                    <img src="{PhotoURL-Panorama}" alt="{PhotoAlt}"/>
+                                {LinkCloseTag}{block:Caption}
+                                    <div class="caption">{Caption}</div>
+                                {/block:Caption}
+                            </li>
+                        {/block:Panorama}
+                        {block:Photoset}
+                            <li class="post photoset">
+                                {Photoset-500}{block:Caption}
+                                    <div class="caption">{Caption}</div>
+                                {/block:Caption}
+                            </li>
+                        {/block:Photoset}
+                        {block:Quote}
+                            <li class="post quote">
+                                "{Quote}"
+                                {block:Source}
+                                    <div class="source">{Source}</div>
+                                {/block:Source}
+                            </li>
+                        {/block:Quote}
+                        {block:Link}
+                            <li class="post link">
+                                <a href="{URL}" class="link" {Target}>{Name}</a>
+                                {block:Description}
+                                    <div class="description">{Description}</div>
+                                {/block:Description}
+                            </li>
+                        {/block:Link}
+                        {block:Chat}
+                            <li class="post chat">
+                                {block:Title}
+                                    <h3><a href="{Permalink}">{Title}</a></h3>
+                                {/block:Title}
+                                <ul class="chat">
+                                    {block:Lines}
+                                        <li class="{Alt} user_{UserNumber}">
+                                            {block:Label}
+                                                <span class="label">{Label}</span>
+                                            {/block:Label}{Line}
+                                        </li>
+                                    {/block:Lines}
+                                </ul>
+                            </li>
+                        {/block:Chat}
+                        {block:Video}
+                            <div class="post video">
+                                {Video-400}
+                                {block:Caption}
+                                    <div class="caption" style="display:none">{Caption}</div>
+                                {/block:Caption}
+                            </div>
+                        {/block:Video}
+                        {block:Audio}
+                            <li class="post audio">
+                                {AudioEmbed}{block:Caption}
+                                    <div class="caption">{Caption}</div>
+                                {/block:Caption}
+                            </li>
+                        {/block:Audio}
+                    {/block:Posts}
+            </div>
+        </div>
+        <footer>
+            <div class="footer-nav">
+                {block:PreviousPage}
+                    <a href="{PreviousPage}" class="previous">&#171; Previous</a>
+                {/block:PreviousPage}
+                {block:NextPage}
+                    <a href="{NextPage}" class="next">Next &#187;</a>
+                {/block:NextPage}
+                <a href="/archive" class="archive">Archive</a>
+                <span class="copyright">&copy; Ashis Rai, 2017</span>
+            </div>
+        </footer>
+    </body>
+</html>
